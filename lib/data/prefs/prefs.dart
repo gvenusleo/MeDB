@@ -13,6 +13,6 @@ class Prefs {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static String get themeFont => _prefs.getString('themeFont') ?? 'Sarasa';
+  static String get themeFont => _prefs.getString('themeFont') ?? '';
   static set themeFont(String value) => _prefs.setString('themeFont', value);
 }
