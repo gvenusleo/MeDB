@@ -3,6 +3,7 @@ import 'package:medb/ui/diary/diary_controller.dart';
 import 'package:medb/ui/home/home_controller.dart';
 import 'package:medb/ui/poem/poem_controller.dart';
 import 'package:medb/ui/link/link_controller.dart';
+import 'package:medb/ui/tag/tag_controller.dart';
 
 class HomeBinding implements Bindings {
   @override
@@ -11,5 +12,6 @@ class HomeBinding implements Bindings {
     Get.lazyPut(() => DiaryController());
     Get.lazyPut(() => PoemController());
     Get.lazyPut(() => LinkController());
+    Get.lazyPut(() => TagController());
   }
 }

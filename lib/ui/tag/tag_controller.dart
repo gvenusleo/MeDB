@@ -5,7 +5,7 @@ import 'package:medb/config/config.dart';
 import 'package:medb/data/api/nocodb_client.dart';
 import 'package:medb/utils/log.dart';
 
-class LinkController extends GetxController {
+class TagController extends GetxController {
   late ScrollController scrollController;
   final RxList data = [].obs;
   final RxInt offset = 0.obs;
@@ -36,7 +36,7 @@ class LinkController extends GetxController {
   Future<void> fetchData() async {
     try {
       final res = await client.getRecords(
-        AppConfig.linkTableId,
+        AppConfig.tagTableId,
         offset: offset.value,
         limit: limit,
         sort: '-UpdatedAt,-CreatedAt',
@@ -48,8 +48,7 @@ class LinkController extends GetxController {
         data.addAll(res['list']);
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: "加载失败");
-      Log.e('[UrlController] fetchData: $e');
+      Log.e('[TagController] fetchData: $e');
     }
   }
 
@@ -61,23 +60,23 @@ class LinkController extends GetxController {
   }
 
   /// 上拉加载更多
-  void loadMore() {
-    Log.d('[UrlController] loadMore: offect = $offset');
+  Future<void> loadMore() async {
+    Log.d('[TagController] loadMore: $offset');
     if (isLastPage.value) {
       Fluttertoast.showToast(msg: "已加载全部数据");
       return;
     }
-    offset.value++;
-    fetchData();
+    offset.value += limit;
+    await fetchData();
   }
 
   /// 跳转到编辑页面添加数据
   Future<void> toEditView(Map data) async {
-    // await Get.toNamed('/link/edit', arguments: data);
+    await Get.toNamed('/tag/edit', arguments: data);
 
-    // // 返回后刷新数据
-    // offset.value = 0;
-    // await fetchData();
-    // Fluttertoast.showToast(msg: "已更新数据");
+    // 返回后刷新数据
+    offset.value = 0;
+    await fetchData();
+    Fluttertoast.showToast(msg: "已更新数据");
   }
 }
