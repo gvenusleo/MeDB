@@ -19,7 +19,10 @@ class LinkEditView extends StatelessWidget {
         backgroundColor: Get.theme.colorScheme.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
-        leading: IconButton(onPressed: Get.back, icon: SvgIcon.back()),
+        leading: IconButton(
+          onPressed: Get.back,
+          icon: SvgIcon(assetName: Svg.back),
+        ),
         title: Text("网页链接"),
         centerTitle: true,
         actions: [

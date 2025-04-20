@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/tag/tag_controller.dart';
-import 'package:medb/widgets/datetime_tag.dart';
+import 'package:medb/widgets/item_chip.dart';
 import 'package:medb/widgets/svg.dart';
-import 'package:medb/widgets/text_tag.dart';
 
 class TagView extends StatelessWidget {
   const TagView({super.key});
@@ -19,14 +18,14 @@ class TagView extends StatelessWidget {
         highlightElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         onPressed: () => c.toEditView({}),
-        child: SvgIcon.add(),
+        child: SvgIcon(assetName: Svg.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [
-            IconButton(onPressed: () {}, icon: SvgIcon.layout()),
-            IconButton(onPressed: () {}, icon: SvgIcon.sort()),
+            IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.layout)),
+            IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.sort)),
           ],
         ),
       ),
@@ -55,13 +54,19 @@ class TagView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextTag(label: '标题', value: item['Title']),
+                              ItemChip(
+                                svg: Svg.text,
+                                label: '标题',
+                                value: item['Title'],
+                              ),
                               item['UpdatedAt'] == null
-                                  ? DateTimeTag(
+                                  ? ItemChip(
+                                    svg: Svg.datetime,
                                     label: '更新',
                                     value: item['CreatedAt'],
                                   )
-                                  : DateTimeTag(
+                                  : ItemChip(
+                                    svg: Svg.datetime,
                                     label: '更新',
                                     value: item['UpdatedAt'],
                                   ),

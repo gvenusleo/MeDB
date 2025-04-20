@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medb/widgets/link_tag.dart';
+import 'package:medb/widgets/item_chip.dart';
+import 'package:medb/widgets/svg.dart';
 
 class LinkInput extends StatelessWidget {
   final String label;
@@ -17,7 +18,7 @@ class LinkInput extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       mainAxisSize: MainAxisSize.min,
       children: [
-        LinkTag(label: label, fontSize: 14),
+        ItemChip(svg: Svg.link, label: label, fontSize: 14),
         const SizedBox(width: 4),
         Expanded(
           child: TextField(

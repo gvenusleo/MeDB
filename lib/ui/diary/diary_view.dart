@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/diary/diary_controller.dart';
-import 'package:medb/widgets/datetime_tag.dart';
+import 'package:medb/widgets/item_chip.dart';
 import 'package:medb/widgets/svg.dart';
-import 'package:medb/widgets/tag_tag.dart';
 
 class DiaryView extends StatelessWidget {
   const DiaryView({super.key});
@@ -20,14 +19,14 @@ class DiaryView extends StatelessWidget {
         highlightElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         onPressed: c.toEditView,
-        child: SvgIcon.add(),
+        child: SvgIcon(assetName: Svg.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [
-            IconButton(onPressed: () {}, icon: SvgIcon.layout()),
-            IconButton(onPressed: () {}, icon: SvgIcon.sort()),
+            IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.layout)),
+            IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.sort)),
           ],
         ),
       ),
@@ -65,12 +64,14 @@ class DiaryView extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               if (item['Tags'] != null)
-                                TagTag(
+                                ItemChip(
+                                  svg: Svg.hash,
                                   label: '标签',
                                   value: item['Tags'],
                                   fontSize: 12,
                                 ),
-                              DateTimeTag(
+                              ItemChip(
+                                svg: Svg.datetime,
                                 label: '时间',
                                 value: item['CreatedAt'],
                                 fontSize: 12,

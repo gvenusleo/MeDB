@@ -26,11 +26,11 @@ class HomeView extends StatelessWidget {
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
                 },
-                icon: SvgIcon.menu(),
+                icon: SvgIcon(assetName: Svg.menu),
               ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: SvgIcon.search()),
+          IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.search)),
           const SizedBox(width: 4),
         ],
       ),

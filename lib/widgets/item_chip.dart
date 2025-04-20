@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medb/utils/datetime.dart';
 import 'package:medb/widgets/svg.dart';
 
-class TextTag extends StatelessWidget {
+class ItemChip extends StatelessWidget {
+  final String svg;
   final String label;
   final String? value;
   final double fontSize;
 
-  const TextTag({
+  const ItemChip({
     super.key,
+    required this.svg,
     required this.label,
     this.value,
     this.fontSize = 14,
@@ -23,7 +26,8 @@ class TextTag extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(top: 2),
-          child: SvgIcon.text(
+          child: SvgIcon(
+            assetName: svg,
             size: fontSize,
             color: Get.theme.colorScheme.outline,
           ),
@@ -40,10 +44,13 @@ class TextTag extends StatelessWidget {
           const SizedBox(width: 4),
           Expanded(
             child: Text(
-              value!.replaceAll('\n', ''),
+              svg == Svg.datetime ? dateTimeToString(value!) : value!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: fontSize),
+              style: TextStyle(
+                fontSize: fontSize,
+                color: Get.theme.colorScheme.outline,
+              ),
             ),
           ),
         ],

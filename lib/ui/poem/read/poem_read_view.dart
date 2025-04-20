@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/poem/read/poem_read_controller.dart';
-import 'package:medb/widgets/datetime_tag.dart';
+import 'package:medb/widgets/item_chip.dart';
 import 'package:medb/widgets/me_card.dart';
 import 'package:medb/widgets/svg.dart';
 
@@ -18,11 +18,17 @@ class PoemReadView extends StatelessWidget {
         backgroundColor: Get.theme.colorScheme.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
-        leading: IconButton(onPressed: Get.back, icon: SvgIcon.back()),
+        leading: IconButton(
+          onPressed: Get.back,
+          icon: SvgIcon(assetName: Svg.back),
+        ),
         title: Text('诗词歌赋'),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: c.toEdit, icon: SvgIcon.edit(size: 18)),
+          IconButton(
+            onPressed: c.toEdit,
+            icon: SvgIcon(assetName: Svg.edit, size: 18),
+          ),
           const SizedBox(width: 8),
         ],
       ),
@@ -67,13 +73,15 @@ class PoemReadView extends StatelessWidget {
                   ],
                   const SizedBox(height: 18),
                   if (c.data['UpdatedAt'] != null)
-                    DateTimeTag(
+                    ItemChip(
+                      svg: Svg.datetime,
                       label: '更新',
                       value: c.data['UpdatedAt'],
                       fontSize: 12,
                     ),
                   if (c.data['CreatedAt'] != null)
-                    DateTimeTag(
+                    ItemChip(
+                      svg: Svg.datetime,
                       label: '创建',
                       value: c.data['CreatedAt'],
                       fontSize: 12,

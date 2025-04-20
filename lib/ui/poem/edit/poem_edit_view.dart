@@ -18,7 +18,10 @@ class PoemEditView extends StatelessWidget {
         backgroundColor: Get.theme.colorScheme.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
-        leading: IconButton(onPressed: Get.back, icon: SvgIcon.back()),
+        leading: IconButton(
+          onPressed: Get.back,
+          icon: SvgIcon(assetName: Svg.back),
+        ),
         title: Text("诗词歌赋"),
         centerTitle: true,
         actions: [

@@ -14,12 +14,12 @@ void main() {
   sb.writeln("import \"package:flutter_svg/flutter_svg.dart\";");
   sb.writeln("import \"package:get/get.dart\";");
   sb.writeln("");
-  sb.writeln("class SvgIcon {");
-  sb.writeln("  static final SvgIcon _instance = SvgIcon._internal();");
+  sb.writeln("class Svg {");
+  sb.writeln("  static final Svg _instance = Svg._internal();");
   sb.writeln("");
-  sb.writeln("  factory SvgIcon() => _instance;");
+  sb.writeln("  factory Svg() => _instance;");
   sb.writeln("");
-  sb.writeln("  SvgIcon._internal();");
+  sb.writeln("  Svg._internal();");
   sb.writeln("");
 
   for (final svgFile in svgFiles) {
@@ -27,20 +27,32 @@ void main() {
 
     print("Generating $fileName...");
 
-    sb.writeln("  static Widget $fileName({double? size, Color? color}) =>");
-    sb.writeln("      _buildSvg(\"assets/svg/$fileName.svg\", size, color);");
-    sb.writeln("");
+    sb.writeln(
+      "  static String get $fileName => \"assets/svg/$fileName.svg\";",
+    );
   }
 
-  print("Generating ${svgFiles.length} svg files.");
+  sb.writeln("}");
+  sb.writeln("");
 
-  sb.writeln(
-    "  static Widget _buildSvg(String assetName, double? size, Color? color) {",
-  );
+  sb.writeln("class SvgIcon extends StatelessWidget {");
+  sb.writeln("  final String assetName;");
+  sb.writeln("  final double? size;");
+  sb.writeln("  final Color? color;");
+  sb.writeln("");
+  sb.writeln("  const SvgIcon({");
+  sb.writeln("    super.key,");
+  sb.writeln("    required this.assetName,");
+  sb.writeln("    this.size,");
+  sb.writeln("    this.color,");
+  sb.writeln("  });");
+  sb.writeln("");
+  sb.writeln("  @override");
+  sb.writeln("  Widget build(BuildContext context) {");
   sb.writeln("    return SvgPicture.asset(");
   sb.writeln("      assetName,");
-  sb.writeln("      width: size ?? 24,");
-  sb.writeln("      height: size ?? 24,");
+  sb.writeln("      width: size?? 24,");
+  sb.writeln("      height: size?? 24,");
   sb.writeln("      colorFilter: ColorFilter.mode(");
   sb.writeln("        color?? Get.theme.colorScheme.onSurface,");
   sb.writeln("        BlendMode.srcIn,");
@@ -48,6 +60,9 @@ void main() {
   sb.writeln("    );");
   sb.writeln("  }");
   sb.writeln("}");
+  sb.writeln("");
+
+  print("Generating ${svgFiles.length} svg files.");
 
   final outputFile = File("lib/widgets/svg.dart");
   outputFile.writeAsStringSync(sb.toString());

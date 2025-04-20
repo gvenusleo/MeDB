@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:get/get.dart";
-import "package:medb/widgets/text_tag.dart";
+import "package:medb/widgets/item_chip.dart";
+import "package:medb/widgets/svg.dart";
 
 /// 文本输入组件
 /// 文本框高度随文本增加
@@ -30,7 +31,7 @@ class TextInput extends StatelessWidget {
         textBaseline: TextBaseline.alphabetic,
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextTag(label: label, fontSize: 14),
+          ItemChip(svg: Svg.text, label: label, fontSize: 14),
           const SizedBox(width: 4),
           Expanded(
             child: TextField(
@@ -57,7 +58,7 @@ class TextInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextTag(label: label, fontSize: 14),
+        ItemChip(svg: Svg.text, label: label, fontSize: 14),
         const SizedBox(height: 4),
         TextField(
           style: TextStyle(fontSize: 14),

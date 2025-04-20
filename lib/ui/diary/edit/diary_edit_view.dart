@@ -18,7 +18,10 @@ class DiaryEditView extends StatelessWidget {
         backgroundColor: Get.theme.colorScheme.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
-        leading: IconButton(onPressed: Get.back, icon: SvgIcon.back()),
+        leading: IconButton(
+          onPressed: Get.back,
+          icon: SvgIcon(assetName: Svg.back),
+        ),
         title: Text("人生海海"),
         centerTitle: true,
         actions: [

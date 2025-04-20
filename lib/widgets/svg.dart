@@ -2,56 +2,38 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:get/get.dart";
 
-class SvgIcon {
-  static final SvgIcon _instance = SvgIcon._internal();
+class Svg {
+  static final Svg _instance = Svg._internal();
 
-  factory SvgIcon() => _instance;
+  factory Svg() => _instance;
 
-  SvgIcon._internal();
+  Svg._internal();
 
-  static Widget search({double? size, Color? color}) =>
-      _buildSvg("assets/svg/search.svg", size, color);
+  static String get search => "assets/svg/search.svg";
+  static String get menu => "assets/svg/menu.svg";
+  static String get datetime => "assets/svg/datetime.svg";
+  static String get edit => "assets/svg/edit.svg";
+  static String get sort => "assets/svg/sort.svg";
+  static String get layout => "assets/svg/layout.svg";
+  static String get link => "assets/svg/link.svg";
+  static String get atom => "assets/svg/atom.svg";
+  static String get hash => "assets/svg/hash.svg";
+  static String get text => "assets/svg/text.svg";
+  static String get key => "assets/svg/key.svg";
+  static String get back => "assets/svg/back.svg";
+  static String get box => "assets/svg/box.svg";
+  static String get add => "assets/svg/add.svg";
+}
 
-  static Widget menu({double? size, Color? color}) =>
-      _buildSvg("assets/svg/menu.svg", size, color);
+class SvgIcon extends StatelessWidget {
+  final String assetName;
+  final double? size;
+  final Color? color;
 
-  static Widget datetime({double? size, Color? color}) =>
-      _buildSvg("assets/svg/datetime.svg", size, color);
+  const SvgIcon({super.key, required this.assetName, this.size, this.color});
 
-  static Widget edit({double? size, Color? color}) =>
-      _buildSvg("assets/svg/edit.svg", size, color);
-
-  static Widget sort({double? size, Color? color}) =>
-      _buildSvg("assets/svg/sort.svg", size, color);
-
-  static Widget layout({double? size, Color? color}) =>
-      _buildSvg("assets/svg/layout.svg", size, color);
-
-  static Widget link({double? size, Color? color}) =>
-      _buildSvg("assets/svg/link.svg", size, color);
-
-  static Widget atom({double? size, Color? color}) =>
-      _buildSvg("assets/svg/atom.svg", size, color);
-
-  static Widget hash({double? size, Color? color}) =>
-      _buildSvg("assets/svg/hash.svg", size, color);
-
-  static Widget text({double? size, Color? color}) =>
-      _buildSvg("assets/svg/text.svg", size, color);
-
-  static Widget key({double? size, Color? color}) =>
-      _buildSvg("assets/svg/key.svg", size, color);
-
-  static Widget back({double? size, Color? color}) =>
-      _buildSvg("assets/svg/back.svg", size, color);
-
-  static Widget box({double? size, Color? color}) =>
-      _buildSvg("assets/svg/box.svg", size, color);
-
-  static Widget add({double? size, Color? color}) =>
-      _buildSvg("assets/svg/add.svg", size, color);
-
-  static Widget _buildSvg(String assetName, double? size, Color? color) {
+  @override
+  Widget build(BuildContext context) {
     return SvgPicture.asset(
       assetName,
       width: size ?? 24,

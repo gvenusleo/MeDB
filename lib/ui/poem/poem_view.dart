@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/poem/poem_controller.dart';
-import 'package:medb/widgets/datetime_tag.dart';
+import 'package:medb/widgets/item_chip.dart';
 import 'package:medb/widgets/svg.dart';
-import 'package:medb/widgets/text_tag.dart';
 
 class PoemView extends StatelessWidget {
   const PoemView({super.key});
@@ -20,14 +19,14 @@ class PoemView extends StatelessWidget {
         highlightElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         onPressed: c.toEditView,
-        child: SvgIcon.add(),
+        child: SvgIcon(assetName: Svg.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [
-            IconButton(onPressed: () {}, icon: SvgIcon.layout()),
-            IconButton(onPressed: () {}, icon: SvgIcon.sort()),
+            IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.layout)),
+            IconButton(onPressed: () {}, icon: SvgIcon(assetName: Svg.sort)),
           ],
         ),
       ),
@@ -63,16 +62,30 @@ class PoemView extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 2),
-                              TextTag(label: '作者', value: item['Author']),
-                              TextTag(label: '内容', value: item['Content']),
+                              ItemChip(
+                                svg: Svg.text,
+                                label: '作者',
+                                value: item['Author'],
+                              ),
+                              ItemChip(
+                                svg: Svg.text,
+                                label: '内容',
+                                value: item['Content'],
+                              ),
                               if (item['Note'] != null)
-                                TextTag(label: '笔记', value: item['Note']),
+                                ItemChip(
+                                  svg: Svg.text,
+                                  label: '笔记',
+                                  value: item['Note'],
+                                ),
                               item['UpdatedAt'] == null
-                                  ? DateTimeTag(
+                                  ? ItemChip(
+                                    svg: Svg.datetime,
                                     label: '更新',
                                     value: item['CreatedAt'],
                                   )
-                                  : DateTimeTag(
+                                  : ItemChip(
+                                    svg: Svg.datetime,
                                     label: '更新',
                                     value: item['UpdatedAt'],
                                   ),
