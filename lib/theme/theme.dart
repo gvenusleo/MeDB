@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:medb/data/prefs/prefs.dart';
+import 'package:get/get.dart';
+import 'package:medb/service/prefs_service.dart';
 
 class AppTheme {
   static final Color _colorSeed = Color(0xff40a02b);
+  static final prefsService = Get.find<PrefsService>();
 
   static ThemeData get lightTheme {
     return ThemeData(
-      fontFamily: Prefs.themeFont,
+      fontFamily: prefsService.themeFont,
       colorScheme: ColorScheme.fromSeed(
         seedColor: _colorSeed,
         brightness: Brightness.light,
@@ -15,7 +17,7 @@ class AppTheme {
   }
 
   static ThemeData get darkTheme => ThemeData(
-    fontFamily: Prefs.themeFont,
+    fontFamily: prefsService.themeFont,
     colorScheme: ColorScheme.fromSeed(
       seedColor: _colorSeed,
       brightness: Brightness.dark,

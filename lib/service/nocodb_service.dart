@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' show GetxService;
 import 'package:medb/config/config.dart';
 
-class NocoDbClient {
-  static final NocoDbClient _instance = NocoDbClient._internal();
+class NocoDbService extends GetxService {
   static late final Dio _dio;
 
-  NocoDbClient._internal() {
+  @override
+  void onInit() {
+    super.onInit();
     _dio = Dio(
       BaseOptions(
         baseUrl: AppConfig.baseUrl,
@@ -16,8 +18,6 @@ class NocoDbClient {
       ),
     );
   }
-
-  factory NocoDbClient() => _instance;
 
   /// 获取所有数据
   Future<dynamic> getRecords(

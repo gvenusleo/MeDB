@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:medb/config/config.dart';
-import 'package:medb/data/api/nocodb_client.dart';
+import 'package:medb/service/nocodb_service.dart';
 import 'package:medb/utils/log.dart';
 
 class PoemEditController extends GetxController {
@@ -13,7 +13,7 @@ class PoemEditController extends GetxController {
   late TextEditingController contentController;
   late TextEditingController noteController;
 
-  final client = NocoDbClient();
+  final dbService = Get.find<NocoDbService>();
 
   @override
   void onInit() {
@@ -47,9 +47,9 @@ class PoemEditController extends GetxController {
 
     try {
       if (p['Id'] == null) {
-        await client.createRecord(AppConfig.poemTableId, p);
+        await dbService.createRecord(AppConfig.poemTableId, p);
       } else {
-        await client.updateRecord(AppConfig.poemTableId, p);
+        await dbService.updateRecord(AppConfig.poemTableId, p);
       }
     } catch (e) {
       Fluttertoast.showToast(msg: '保存失败');

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:medb/config/config.dart';
-import 'package:medb/data/api/nocodb_client.dart';
+import 'package:medb/service/nocodb_service.dart';
 import 'package:medb/utils/log.dart';
 
 class DiaryController extends GetxController {
@@ -12,7 +12,7 @@ class DiaryController extends GetxController {
   final int limit = 25;
   final RxBool isLastPage = false.obs;
 
-  final client = NocoDbClient();
+  final dbService = Get.find<NocoDbService>();
 
   @override
   void onInit() {
@@ -35,7 +35,7 @@ class DiaryController extends GetxController {
   /// 获取数据
   Future<void> fetchData() async {
     try {
-      final res = await client.getRecords(
+      final res = await dbService.getRecords(
         AppConfig.diaryTableId,
         offset: offset.value,
         limit: limit,

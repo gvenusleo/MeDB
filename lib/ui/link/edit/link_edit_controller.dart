@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:medb/config/config.dart';
-import 'package:medb/data/api/nocodb_client.dart';
+import 'package:medb/service/nocodb_service.dart';
 import 'package:medb/utils/log.dart';
 
 class LinkEditController extends GetxController {
@@ -11,7 +11,7 @@ class LinkEditController extends GetxController {
   late TextEditingController titleController;
   late TextEditingController urlController;
 
-  final client = NocoDbClient();
+  final dbService = Get.find<NocoDbService>();
 
   @override
   void onInit() {
@@ -37,9 +37,9 @@ class LinkEditController extends GetxController {
 
     try {
       if (u['Id'] == null) {
-        await client.createRecord(AppConfig.linkTableId, u);
+        await dbService.createRecord(AppConfig.linkTableId, u);
       } else {
-        await client.updateRecord(AppConfig.linkTableId, u);
+        await dbService.updateRecord(AppConfig.linkTableId, u);
       }
     } catch (e) {
       Fluttertoast.showToast(msg: "保存失败");

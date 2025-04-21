@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:medb/data/prefs/prefs.dart';
+import 'package:medb/service/nocodb_service.dart';
+import 'package:medb/service/prefs_service.dart';
 import 'package:medb/routes/routes.dart';
 import 'package:medb/theme/theme.dart';
 
@@ -22,7 +23,9 @@ Future<void> main() async {
     );
   }
 
-  await Prefs.init();
+  // 初始化全局服务
+  await Get.putAsync(() => PrefsService().init());
+  Get.put(NocoDbService());
 
   runApp(const MyApp());
 }
