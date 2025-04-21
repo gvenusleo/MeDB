@@ -6,7 +6,7 @@ import 'package:medb/widgets/svg.dart';
 class ItemChip extends StatelessWidget {
   final String svg;
   final String label;
-  final String? value;
+  final dynamic value;
   final double fontSize;
 
   const ItemChip({
@@ -43,15 +43,44 @@ class ItemChip extends StatelessWidget {
         if (value != null) ...[
           const SizedBox(width: 4),
           Expanded(
-            child: Text(
-              svg == Svg.datetime ? dateTimeToString(value!) : value!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: fontSize,
-                color: Get.theme.colorScheme.outline,
-              ),
-            ),
+            child:
+                svg == Svg.hash
+                    ? SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          for (final e in value!)
+                            Container(
+                              decoration: BoxDecoration(
+                                color:
+                                    Get
+                                        .theme
+                                        .colorScheme
+                                        .surfaceContainerHighest,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              margin: EdgeInsets.only(right: 4),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 2,
+                              ),
+                              child: Text(
+                                e.toString(),
+                                style: TextStyle(fontSize: fontSize - 2),
+                              ),
+                            ),
+                        ],
+                      ),
+                    )
+                    : Text(
+                      svg == Svg.datetime
+                          ? dateTimeToString(value!.toString())
+                          : value!.toString(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: fontSize),
+                    ),
           ),
         ],
       ],
