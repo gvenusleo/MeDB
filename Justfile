@@ -1,20 +1,8 @@
 dev:
-    flutter run \
-        --dart-define=NocoDbBaseUrl="${NocoDbBaseUrl}" \
-        --dart-define=NocoDbToken="${NocoDbToken}" \
-        --dart-define=NocoDbTagTableId="${NocoDbTagTableId}" \
-        --dart-define=NocoDbDiaryTableId="${NocoDbDiaryTableId}" \
-        --dart-define=NocoDbPoemTableId="${NocoDbPoemTableId}" \
-        --dart-define=NocoDbLinkTableId="${NocoDbLinkTableId}"
+    flutter run --dart-define-from-file=./.env
 
 apk:
-    flutter build apk --release \
-        --dart-define=NocoDbBaseUrl="${NocoDbBaseUrl}" \
-        --dart-define=NocoDbToken="${NocoDbToken}" \
-        --dart-define=NocoDbTagTableId="${NocoDbTagTableId}" \
-        --dart-define=NocoDbDiaryTableId="${NocoDbDiaryTableId}" \
-        --dart-define=NocoDbPoemTableId="${NocoDbPoemTableId}" \
-        --dart-define=NocoDbLinkTableId="${NocoDbLinkTableId}"
+    flutter build apk --release --dart-define-from-file=./.env
 
 svg:
     dart build_svg.dart
