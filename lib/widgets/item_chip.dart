@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/utils/datetime.dart';
 import 'package:medb/widgets/svg.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ItemChip extends StatelessWidget {
   final String svg;
@@ -73,13 +74,19 @@ class ItemChip extends StatelessWidget {
                         ],
                       ),
                     )
-                    : Text(
-                      svg == Svg.datetime
-                          ? dateTimeToString(value!.toString())
-                          : value!.toString().replaceAll('\n', ''),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: fontSize),
+                    : GestureDetector(
+                      onTap:
+                          svg == Svg.link
+                              ? () => launchUrlString(value!.toString())
+                              : null,
+                      child: Text(
+                        svg == Svg.datetime
+                            ? dateTimeToString(value!.toString())
+                            : value!.toString().replaceAll('\n', ''),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: fontSize),
+                      ),
                     ),
           ),
         ],
