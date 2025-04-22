@@ -76,7 +76,7 @@ class ItemChip extends StatelessWidget {
                     : Text(
                       svg == Svg.datetime
                           ? dateTimeToString(value!.toString())
-                          : value!.toString(),
+                          : value!.toString().replaceAll('\n', ''),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontSize: fontSize),
