@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:medb/service/nocodb_service.dart';
@@ -22,6 +23,9 @@ Future<void> main() async {
       ),
     );
   }
+
+  // 加载 .env 文件
+  await dotenv.load(fileName: ".env");
 
   // 初始化全局服务
   await Get.putAsync(() => PrefsService().init());

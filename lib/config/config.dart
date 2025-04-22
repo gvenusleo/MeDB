@@ -1,11 +1,11 @@
-class AppConfig {
-  static const String baseUrl = String.fromEnvironment('NocoDbBaseUrl');
-  static const String token = String.fromEnvironment('NocoDbToken');
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  static const String tagTableId = String.fromEnvironment('NocoDbTagTableId');
-  static const String diaryTableId = String.fromEnvironment(
-    'NocoDbDiaryTableId',
-  );
-  static const String poemTableId = String.fromEnvironment('NocoDbPoemTableId');
-  static const String linkTableId = String.fromEnvironment('NocoDbLinkTableId');
+class AppConfig {
+  static String baseUrl = dotenv.get('NocoDbBaseUrl');
+  static String token = dotenv.get('NocoDbToken');
+
+  static String tagTableId = dotenv.get('NocoDbTagTableId');
+  static String diaryTableId = dotenv.get('NocoDbDiaryTableId');
+  static String poemTableId = dotenv.get('NocoDbPoemTableId');
+  static String linkTableId = dotenv.get('NocoDbLinkTableId');
 }

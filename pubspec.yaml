@@ -45,6 +45,7 @@ dependencies:
   fluttertoast: ^8.2.12
   dio: ^5.8.0+1
   url_launcher: ^6.3.1
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
   # https://flutter.dev/to/asset-from-package
 
   assets:
+    - .env
     - assets/svg/
 
   # To add custom fonts to your application, add a fonts section here,
