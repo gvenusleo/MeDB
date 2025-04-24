@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medb/utils/datetime.dart';
+import 'package:medb/common/datetime.dart';
 import 'package:medb/widgets/svg.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 

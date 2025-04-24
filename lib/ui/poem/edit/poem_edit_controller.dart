@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:medb/config/config.dart';
 import 'package:medb/service/nocodb_service.dart';
-import 'package:medb/utils/log.dart';
+import 'package:medb/common/log.dart';
 
 class PoemEditController extends GetxController {
   late Map poem;

@@ -17,7 +17,7 @@ class LinkView extends StatelessWidget {
         focusElevation: 0,
         highlightElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        onPressed: () => c.toEditView({}),
+        onPressed: c.toEditView,
         child: SvgIcon(assetName: Svg.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
@@ -46,7 +46,7 @@ class LinkView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = c.data[index];
                       return GestureDetector(
-                        onTap: () => c.toEditView(item),
+                        onTap: () => c.toEditView(item: item),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Get.theme.colorScheme.surfaceContainer,
