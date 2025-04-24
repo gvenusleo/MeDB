@@ -40,7 +40,9 @@ class PoemView extends StatelessWidget {
                   child: ListView.separated(
                     controller: c.scrollController,
                     padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                    physics: const BouncingScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(
+                      parent: BouncingScrollPhysics(),
+                    ),
                     itemCount: c.data.length,
                     itemBuilder: (context, index) {
                       final item = c.data[index];

@@ -72,11 +72,11 @@ class TagController extends GetxController {
 
   /// 跳转到编辑页面添加数据
   Future<void> toEditView(Map data) async {
-    await Get.toNamed('/tag/edit', arguments: data);
+    // await Get.toNamed('/tag/edit', arguments: data);
 
-    // 返回后刷新数据
-    offset.value = 0;
-    await fetchData();
-    Fluttertoast.showToast(msg: "已更新数据");
+    // // 返回后刷新数据
+    // offset.value = 0;
+    // await fetchData();
+    // Fluttertoast.showToast(msg: "已更新数据");
   }
 }
