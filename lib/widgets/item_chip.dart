@@ -62,10 +62,7 @@ class ItemChip extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               margin: EdgeInsets.only(right: 4),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 4,
-                                vertical: 2,
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 2),
                               child: Text(
                                 e.toString(),
                                 style: TextStyle(fontSize: fontSize - 2),
