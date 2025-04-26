@@ -7,4 +7,7 @@ class TagController extends BaseController {
 
   @override
   String get tag => 'TagController';
+
+  @override
+  String get editViewRoute => '/tag/edit';
 }
