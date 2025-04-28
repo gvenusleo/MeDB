@@ -7,7 +7,7 @@ import 'package:medb/ui/tag/tag_view.dart';
 import 'package:medb/widgets/svg.dart';
 
 class HomeController extends GetxController {
-  // Drawer 数据表
+  /// Drawer 数据表
   final Map<String, Widget> tables = {
     '人生海海': SvgIcon(assetName: Svg.atom, size: 16),
     '诗词歌赋': SvgIcon(assetName: Svg.box, size: 16),
@@ -15,7 +15,7 @@ class HomeController extends GetxController {
     '标签管理': SvgIcon(assetName: Svg.hash, size: 16),
   };
 
-  // 主页视图
+  /// 主页视图
   final List<Widget> views = [
     const DiaryView(),
     const PoemView(),
@@ -23,12 +23,17 @@ class HomeController extends GetxController {
     const TagView(),
   ];
 
-  // Drawer 当前选中的表
+  /// Drawer 当前选中的表
   RxInt currentTableIndex = 0.obs;
 
   /// 通过 Drawer 切换数据表
   void onTableChanged(int index) {
     currentTableIndex.value = index;
     Get.back();
+  }
+
+  /// 跳转到设置页面
+  void toSettingsView() {
+    Get.toNamed('/settings');
   }
 }

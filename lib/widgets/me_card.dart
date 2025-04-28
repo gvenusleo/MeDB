@@ -4,17 +4,19 @@ import "package:get/get.dart";
 class MeCard extends StatelessWidget {
   final List<Widget> children;
   final EdgeInsets margin;
+  final EdgeInsets padding;
 
   const MeCard({
     super.key,
     required this.children,
     this.margin = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.all(12),
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: padding,
       margin: margin,
       decoration: BoxDecoration(
         color:

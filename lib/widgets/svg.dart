@@ -11,10 +11,13 @@ class Svg {
 
   static String get search => "assets/svg/search.svg";
   static String get menu => "assets/svg/menu.svg";
+  static String get moon => "assets/svg/moon.svg";
+  static String get settings => "assets/svg/settings.svg";
   static String get datetime => "assets/svg/datetime.svg";
   static String get edit => "assets/svg/edit.svg";
   static String get sort => "assets/svg/sort.svg";
   static String get layout => "assets/svg/layout.svg";
+  static String get palette => "assets/svg/palette.svg";
   static String get link => "assets/svg/link.svg";
   static String get atom => "assets/svg/atom.svg";
   static String get hash => "assets/svg/hash.svg";
@@ -23,6 +26,7 @@ class Svg {
   static String get back => "assets/svg/back.svg";
   static String get box => "assets/svg/box.svg";
   static String get add => "assets/svg/add.svg";
+  static String get chevron => "assets/svg/chevron.svg";
 }
 
 class SvgIcon extends StatelessWidget {

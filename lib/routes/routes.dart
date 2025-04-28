@@ -11,6 +11,8 @@ import 'package:medb/ui/poem/edit/poem_edit_binding.dart';
 import 'package:medb/ui/poem/edit/poem_edit_view.dart';
 import 'package:medb/ui/poem/read/poem_read_binding.dart';
 import 'package:medb/ui/poem/read/poem_read_view.dart';
+import 'package:medb/ui/settings/settings_binding.dart';
+import 'package:medb/ui/settings/settings_view.dart';
 import 'package:medb/ui/tag/edit/tag_edit_binding.dart';
 import 'package:medb/ui/tag/edit/tag_edit_view.dart';
 
@@ -48,6 +50,11 @@ class AppRoutes {
       name: '/tag/edit',
       page: () => const TagEditView(),
       binding: TagEditBinding(),
+    ),
+    GetPage(
+      name: '/settings',
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
     ),
   ];
 }

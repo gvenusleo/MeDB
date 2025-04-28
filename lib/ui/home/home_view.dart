@@ -36,32 +36,65 @@ class HomeView extends StatelessWidget {
       ),
       drawerEdgeDragWidth: Get.mediaQuery.size.width * 0.75,
       drawerEnableOpenDragGesture: true,
-      drawer: Obx(
-        () => NavigationDrawer(
-          selectedIndex: c.currentTableIndex.value,
-          onDestinationSelected: c.onTableChanged,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('MeDB ', style: Get.theme.textTheme.titleLarge),
-                  Text('with NocoDB', style: Get.theme.textTheme.titleSmall),
-                ],
+      drawer: Drawer(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('MeDB ', style: Get.theme.textTheme.titleLarge),
+                    Text('with NocoDB', style: Get.theme.textTheme.titleSmall),
+                  ],
+                ),
               ),
-            ),
-            const Divider(thickness: 0.5, indent: 12, endIndent: 12),
-            const SizedBox(height: 12),
-            for (MapEntry item in c.tables.entries)
-              NavigationDrawerDestination(
-                icon: item.value,
-                label: Text(item.key),
+              const Divider(thickness: 0.5, indent: 12, endIndent: 12),
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  itemCount: c.tables.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: c.tables.values.elementAt(index),
+                      title: Text(c.tables.keys.toList()[index]),
+                      onTap: () => c.onTableChanged(index),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(96),
+                      ),
+                      selected: c.currentTableIndex.value == index,
+                      selectedTileColor:
+                          Get.theme.colorScheme.surfaceContainerHigh,
+                      selectedColor: Get.theme.colorScheme.onSurface,
+                    );
+                  },
+                ),
               ),
-          ],
+              const Divider(thickness: 0.5, indent: 12, endIndent: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: ListTile(
+                  leading: SvgIcon(assetName: Svg.settings, size: 20),
+                  title: const Text('应用设置'),
+                  onTap: c.toSettingsView,
+                  tileColor: Get.theme.colorScheme.surfaceContainerHigh,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+            ],
+          ),
         ),
       ),
       body: Obx(() => c.views[c.currentTableIndex.value]),
