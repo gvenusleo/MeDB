@@ -34,13 +34,13 @@ class SettingsView extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 children: [
                   ListTile(
-                    leading: SvgIcon(assetName: Svg.moon, size: 20),
+                    leading: SvgIcon(assetName: Svg.moon, size: 18),
                     title: const Text('暗色模式'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('跟随系统'),
-                        SvgIcon(assetName: Svg.chevron, size: 20),
+                        SvgIcon(assetName: Svg.chevron, size: 18),
                       ],
                     ),
                     onTap: () {},
@@ -50,14 +50,20 @@ class SettingsView extends StatelessWidget {
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                   ),
+                  const Divider(
+                    height: 0,
+                    thickness: 0.5,
+                    indent: 12,
+                    endIndent: 12,
+                  ),
                   ListTile(
-                    leading: SvgIcon(assetName: Svg.palette, size: 20),
+                    leading: SvgIcon(assetName: Svg.palette, size: 18),
                     title: const Text('主题颜色'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('绿野仙踪'),
-                        SvgIcon(assetName: Svg.chevron, size: 20),
+                        SvgIcon(assetName: Svg.chevron, size: 18),
                       ],
                     ),
                     onTap: () {},

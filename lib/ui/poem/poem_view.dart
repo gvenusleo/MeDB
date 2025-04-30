@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/poem/poem_controller.dart';
 import 'package:medb/widgets/item_chip.dart';
+import 'package:medb/widgets/me_card.dart';
 import 'package:medb/widgets/svg.dart';
 
 class PoemView extends StatelessWidget {
@@ -48,51 +49,43 @@ class PoemView extends StatelessWidget {
                       final item = c.data[index];
                       return GestureDetector(
                         onTap: () => c.toReadView(item),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Get.theme.colorScheme.surfaceContainer,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item['Title'],
-                                style: TextStyle(fontSize: 18),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 2),
+                        child: MeCard(
+                          children: [
+                            Text(
+                              item['Title'],
+                              style: TextStyle(fontSize: 18),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 2),
+                            ItemChip(
+                              svg: Svg.text,
+                              label: '作者',
+                              value: item['Author'],
+                            ),
+                            ItemChip(
+                              svg: Svg.text,
+                              label: '内容',
+                              value: item['Content'],
+                            ),
+                            if (item['Note'] != null)
                               ItemChip(
                                 svg: Svg.text,
-                                label: '作者',
-                                value: item['Author'],
+                                label: '笔记',
+                                value: item['Note'],
                               ),
-                              ItemChip(
-                                svg: Svg.text,
-                                label: '内容',
-                                value: item['Content'],
-                              ),
-                              if (item['Note'] != null)
-                                ItemChip(
-                                  svg: Svg.text,
-                                  label: '笔记',
-                                  value: item['Note'],
+                            item['UpdatedAt'] == null
+                                ? ItemChip(
+                                  svg: Svg.datetime,
+                                  label: '更新',
+                                  value: item['CreatedAt'],
+                                )
+                                : ItemChip(
+                                  svg: Svg.datetime,
+                                  label: '更新',
+                                  value: item['UpdatedAt'],
                                 ),
-                              item['UpdatedAt'] == null
-                                  ? ItemChip(
-                                    svg: Svg.datetime,
-                                    label: '更新',
-                                    value: item['CreatedAt'],
-                                  )
-                                  : ItemChip(
-                                    svg: Svg.datetime,
-                                    label: '更新',
-                                    value: item['UpdatedAt'],
-                                  ),
-                            ],
-                          ),
+                          ],
                         ),
                       );
                     },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/link/link_controller.dart';
 import 'package:medb/widgets/item_chip.dart';
+import 'package:medb/widgets/me_card.dart';
 import 'package:medb/widgets/svg.dart';
 
 class LinkView extends StatelessWidget {
@@ -47,44 +48,36 @@ class LinkView extends StatelessWidget {
                       final item = c.data[index];
                       return GestureDetector(
                         onTap: () => c.toEditView(item: item),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Get.theme.colorScheme.surfaceContainer,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                        child: MeCard(
+                          children: [
+                            ItemChip(
+                              svg: Svg.text,
+                              label: '标题',
+                              value: item['Title'],
+                            ),
+                            ItemChip(
+                              svg: Svg.link,
+                              label: '链接',
+                              value: item['Url'],
+                            ),
+                            if (item['Tags'] != null)
                               ItemChip(
-                                svg: Svg.text,
-                                label: '标题',
-                                value: item['Title'],
+                                svg: Svg.hash,
+                                label: '标签',
+                                value: item['Tags'],
                               ),
-                              ItemChip(
-                                svg: Svg.link,
-                                label: '链接',
-                                value: item['Url'],
-                              ),
-                              if (item['Tags'] != null)
-                                ItemChip(
-                                  svg: Svg.hash,
-                                  label: '标签',
-                                  value: item['Tags'],
+                            item['UpdatedAt'] == null
+                                ? ItemChip(
+                                  svg: Svg.datetime,
+                                  label: '更新',
+                                  value: item['CreatedAt'],
+                                )
+                                : ItemChip(
+                                  svg: Svg.datetime,
+                                  label: '更新',
+                                  value: item['UpdatedAt'],
                                 ),
-                              item['UpdatedAt'] == null
-                                  ? ItemChip(
-                                    svg: Svg.datetime,
-                                    label: '更新',
-                                    value: item['CreatedAt'],
-                                  )
-                                  : ItemChip(
-                                    svg: Svg.datetime,
-                                    label: '更新',
-                                    value: item['UpdatedAt'],
-                                  ),
-                            ],
-                          ),
+                          ],
                         ),
                       );
                     },

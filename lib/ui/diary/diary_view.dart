@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/diary/diary_controller.dart';
 import 'package:medb/widgets/item_chip.dart';
+import 'package:medb/widgets/me_card.dart';
 import 'package:medb/widgets/svg.dart';
 
 class DiaryView extends StatelessWidget {
@@ -48,38 +49,30 @@ class DiaryView extends StatelessWidget {
                       final item = c.data[index];
                       return GestureDetector(
                         onTap: () => c.toReadView(item),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Get.theme.colorScheme.surfaceContainer,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item['Content'],
-                                style: TextStyle(fontSize: 14),
-                                textAlign: TextAlign.justify,
-                                maxLines: 20,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 4),
-                              if (item['Tags'] != null)
-                                ItemChip(
-                                  svg: Svg.hash,
-                                  label: '标签',
-                                  value: item['Tags'],
-                                  fontSize: 12,
-                                ),
+                        child: MeCard(
+                          children: [
+                            Text(
+                              item['Content'],
+                              style: TextStyle(fontSize: 14),
+                              textAlign: TextAlign.justify,
+                              maxLines: 20,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            if (item['Tags'] != null)
                               ItemChip(
-                                svg: Svg.datetime,
-                                label: '时间',
-                                value: item['CreatedAt'],
+                                svg: Svg.hash,
+                                label: '标签',
+                                value: item['Tags'],
                                 fontSize: 12,
                               ),
-                            ],
-                          ),
+                            ItemChip(
+                              svg: Svg.datetime,
+                              label: '时间',
+                              value: item['CreatedAt'],
+                              fontSize: 12,
+                            ),
+                          ],
                         ),
                       );
                     },

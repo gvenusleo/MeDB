@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medb/ui/tag/tag_controller.dart';
 import 'package:medb/widgets/item_chip.dart';
+import 'package:medb/widgets/me_card.dart';
 import 'package:medb/widgets/svg.dart';
 
 class TagView extends StatelessWidget {
@@ -47,33 +48,25 @@ class TagView extends StatelessWidget {
                       final item = c.data[index];
                       return GestureDetector(
                         onTap: () => c.toEditView(item: item),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Get.theme.colorScheme.surfaceContainer,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ItemChip(
-                                svg: Svg.text,
-                                label: '标题',
-                                value: item['Title'],
-                              ),
-                              item['UpdatedAt'] == null
-                                  ? ItemChip(
-                                    svg: Svg.datetime,
-                                    label: '更新',
-                                    value: item['CreatedAt'],
-                                  )
-                                  : ItemChip(
-                                    svg: Svg.datetime,
-                                    label: '更新',
-                                    value: item['UpdatedAt'],
-                                  ),
-                            ],
-                          ),
+                        child: MeCard(
+                          children: [
+                            ItemChip(
+                              svg: Svg.text,
+                              label: '标题',
+                              value: item['Title'],
+                            ),
+                            item['UpdatedAt'] == null
+                                ? ItemChip(
+                                  svg: Svg.datetime,
+                                  label: '更新',
+                                  value: item['CreatedAt'],
+                                )
+                                : ItemChip(
+                                  svg: Svg.datetime,
+                                  label: '更新',
+                                  value: item['UpdatedAt'],
+                                ),
+                          ],
                         ),
                       );
                     },

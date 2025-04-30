@@ -19,10 +19,7 @@ class MeCard extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        color:
-            Get.theme.brightness == Brightness.light
-                ? Colors.white
-                : Get.theme.colorScheme.surfaceContainer,
+        color: Get.theme.colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: Get.theme.colorScheme.surfaceContainerHighest,
