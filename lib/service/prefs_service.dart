@@ -9,6 +9,9 @@ class PrefsService extends GetxService {
     return this;
   }
 
+  int get themeMode => _prefs.getInt('themeMode') ?? 2;
+  set themeMode(int value) => _prefs.setInt('themeMode', value);
+
   String get themeFont => _prefs.getString('themeFont') ?? '';
   set themeFont(String value) => _prefs.setString('themeFont', value);
 }

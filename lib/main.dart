@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = Get.find<PrefsService>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "MeDB",
@@ -49,9 +50,10 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [const Locale("zh", "CN"), const Locale("en", "US")],
       locale: const Locale("zh", "CN"),
-      themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      themeMode:
+          [ThemeMode.light, ThemeMode.dark, ThemeMode.system][s.themeMode],
       defaultTransition: Transition.cupertino,
       getPages: AppRoutes.routes,
       initialRoute: AppRoutes.initial,

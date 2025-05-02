@@ -9,7 +9,9 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey darkModeKey = GlobalKey();
     final c = Get.find<SettingsController>();
+
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Get.theme.colorScheme.surface,
@@ -34,16 +36,56 @@ class SettingsView extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 children: [
                   ListTile(
+                    key: darkModeKey,
                     leading: SvgIcon(assetName: Svg.moon, size: 18),
                     title: const Text('暗色模式'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('跟随系统'),
+                        Obx(
+                          () =>
+                              Text(["亮色模式", "暗色模式", "跟随系统"][c.themeMode.value]),
+                        ),
                         SvgIcon(assetName: Svg.chevron, size: 18),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      final RenderBox renderBox =
+                          darkModeKey.currentContext!.findRenderObject()
+                              as RenderBox;
+                      final offset = renderBox.localToGlobal(Offset.zero);
+                      showMenu(
+                        context: context,
+                        position: RelativeRect.fromRect(
+                          Rect.fromPoints(
+                            offset.translate(renderBox.size.width, 0),
+                            offset.translate(
+                              renderBox.size.width * 2,
+                              offset.dy + renderBox.size.height,
+                            ),
+                          ),
+                          Offset.zero & MediaQuery.of(context).size,
+                        ),
+                        initialValue: c.themeMode.value,
+                        items: [
+                          PopupMenuItem(
+                            value: 0,
+                            child: Text('亮色模式'),
+                            onTap: () => c.changeThemeMode(0),
+                          ),
+                          PopupMenuItem(
+                            value: 1,
+                            child: Text('暗色模式'),
+                            onTap: () => c.changeThemeMode(1),
+                          ),
+                          PopupMenuItem(
+                            value: 2,
+                            child: Text('跟随系统'),
+                            onTap: () => c.changeThemeMode(2),
+                          ),
+                        ],
+                      );
+                    },
                     visualDensity: VisualDensity.compact,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
