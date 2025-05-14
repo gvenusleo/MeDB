@@ -43,7 +43,7 @@ class BaseController extends GetxController {
         tableId,
         offset: offset.value,
         limit: limit,
-        sort: '-UpdatedAt,-CreatedAt',
+        sort: '-CreatedAt',
       );
       isLastPage.value = res['pageInfo']['isLastPage'];
       if (offset.value == 0) {
