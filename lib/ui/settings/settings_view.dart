@@ -9,7 +9,6 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey darkModeKey = GlobalKey();
     final c = Get.find<SettingsController>();
 
     return Scaffold(
@@ -36,7 +35,6 @@ class SettingsView extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 children: [
                   ListTile(
-                    key: darkModeKey,
                     leading: SvgIcon(assetName: Svg.moon, size: 18),
                     title: const Text('暗色模式'),
                     trailing: Row(
@@ -50,41 +48,62 @@ class SettingsView extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      final RenderBox renderBox =
-                          darkModeKey.currentContext!.findRenderObject()
-                              as RenderBox;
-                      final offset = renderBox.localToGlobal(Offset.zero);
-                      showMenu(
+                      showModalBottomSheet(
                         context: context,
-                        position: RelativeRect.fromRect(
-                          Rect.fromPoints(
-                            offset.translate(renderBox.size.width, 0),
-                            offset.translate(
-                              renderBox.size.width * 2,
-                              offset.dy + renderBox.size.height,
+                        showDragHandle: true,
+                        builder: (context) {
+                          return SafeArea(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                for (int i = 0; i < 3; i++)
+                                  RadioListTile(
+                                    value: i,
+                                    groupValue: c.themeMode.value,
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        c.changeThemeMode(value);
+                                      }
+                                      Get.back();
+                                    },
+                                    title: Text(["亮色模式", "暗色模式", "跟随系统"][i]),
+                                    visualDensity: VisualDensity.compact,
+                                  ),
+                                SizedBox(height: 12),
+                              ],
                             ),
-                          ),
-                          Offset.zero & MediaQuery.of(context).size,
-                        ),
-                        initialValue: c.themeMode.value,
-                        items: [
-                          PopupMenuItem(
-                            value: 0,
-                            child: Text('亮色模式'),
-                            onTap: () => c.changeThemeMode(0),
-                          ),
-                          PopupMenuItem(
-                            value: 1,
-                            child: Text('暗色模式'),
-                            onTap: () => c.changeThemeMode(1),
-                          ),
-                          PopupMenuItem(
-                            value: 2,
-                            child: Text('跟随系统'),
-                            onTap: () => c.changeThemeMode(2),
-                          ),
-                        ],
+                          );
+                        },
                       );
+                      // Get.dialog(
+                      //   AlertDialog(
+                      //     content: Column(
+                      //       mainAxisSize: MainAxisSize.min,
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: [
+                      //         for (int i = 0; i < 3; i++)
+                      //           RadioListTile(
+                      //             value: i,
+                      //             groupValue: c.themeMode.value,
+                      //             onChanged: (value) {
+                      //               if (value != null) {
+                      //                 c.changeThemeMode(value);
+                      //               }
+                      //               Get.back();
+                      //             },
+                      //             title: Text(["亮色模式", "暗色模式", "跟随系统"][i]),
+                      //             shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(48),
+                      //             ),
+                      //             visualDensity: VisualDensity.compact,
+                      //           ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // );
                     },
                     visualDensity: VisualDensity.compact,
                     shape: RoundedRectangleBorder(
