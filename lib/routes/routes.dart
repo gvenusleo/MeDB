@@ -13,8 +13,6 @@ import 'package:medb/ui/poem/read/poem_read_binding.dart';
 import 'package:medb/ui/poem/read/poem_read_view.dart';
 import 'package:medb/ui/settings/settings_binding.dart';
 import 'package:medb/ui/settings/settings_view.dart';
-import 'package:medb/ui/tag/edit/tag_edit_binding.dart';
-import 'package:medb/ui/tag/edit/tag_edit_view.dart';
 
 class AppRoutes {
   static final String initial = '/';
@@ -45,11 +43,6 @@ class AppRoutes {
       name: '/link/edit',
       page: () => const LinkEditView(),
       binding: LinkEditBinding(),
-    ),
-    GetPage(
-      name: '/tag/edit',
-      page: () => const TagEditView(),
-      binding: TagEditBinding(),
     ),
     GetPage(
       name: '/settings',

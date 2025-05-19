@@ -6,6 +6,9 @@ class DiaryController extends BaseController {
   String get tableId => AppConfig.diaryTableId;
 
   @override
+  String get viewId => AppConfig.diaryViewId;
+
+  @override
   String get tag => 'DiaryController';
 
   @override

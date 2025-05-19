@@ -38,39 +38,37 @@ class DiaryReadView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
           physics: const BouncingScrollPhysics(),
           child: SelectionArea(
-            child: Obx(
-              () => MeCard(
-                children: [
-                  Text(
-                    c.data['Content'] ?? '',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 16),
+            child: MeCard(
+              children: [
+                Text(
+                  c.dataFields['Content'] ?? '',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 8),
+                if (c.dataFields['Tags'] != null) ...[
+                  ItemChip(
+                    svg: Svg.hash,
+                    label: '标签',
+                    value: c.dataFields['Tags'],
+                    fontSize: 14,
                   ),
-                  const SizedBox(height: 8),
-                  if (c.data['Tags'] != null) ...[
-                    ItemChip(
-                      svg: Svg.hash,
-                      label: '标签',
-                      value: c.data['Tags'],
-                      fontSize: 14,
-                    ),
-                  ],
-                  if (c.data['UpdatedAt'] != null)
-                    ItemChip(
-                      svg: Svg.datetime,
-                      label: '更新',
-                      value: c.data['UpdatedAt'],
-                      fontSize: 14,
-                    ),
-                  if (c.data['CreatedAt'] != null)
-                    ItemChip(
-                      svg: Svg.datetime,
-                      label: '创建',
-                      value: c.data['CreatedAt'],
-                      fontSize: 14,
-                    ),
                 ],
-              ),
+                if (c.dataFields['UpdatedAt'] != null)
+                  ItemChip(
+                    svg: Svg.datetime,
+                    label: '更新',
+                    value: c.dataFields['UpdatedAt'],
+                    fontSize: 14,
+                  ),
+                if (c.dataFields['CreatedAt'] != null)
+                  ItemChip(
+                    svg: Svg.datetime,
+                    label: '创建',
+                    value: c.dataFields['CreatedAt'],
+                    fontSize: 14,
+                  ),
+              ],
             ),
           ),
         ),

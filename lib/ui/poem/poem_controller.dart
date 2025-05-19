@@ -6,6 +6,9 @@ class PoemController extends BaseController {
   String get tableId => AppConfig.poemTableId;
 
   @override
+  String get viewId => AppConfig.poemViewId;
+
+  @override
   String get tag => 'PoemController';
 
   @override

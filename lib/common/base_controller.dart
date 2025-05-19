@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:medb/common/log.dart';
-import 'package:medb/service/nocodb_service.dart';
+import 'package:medb/service/teable_service.dart';
 
 class BaseController extends GetxController {
   late ScrollController scrollController;
-  final RxList data = [].obs;
-  final RxInt offset = 0.obs;
-  final int limit = 25;
+  final RxList records = [].obs;
+  final RxInt skip = 0.obs;
+  final int take = 20;
   final RxBool isLastPage = false.obs;
 
-  final dbService = Get.find<NocoDbService>();
+  final dbService = Get.find<TeableService>();
   final String tableId = '';
+  final String viewId = '';
   final String tag = 'BaseController'; // 用于日志输出的标签
 
   final String readViewRoute = '';
@@ -41,15 +42,16 @@ class BaseController extends GetxController {
     try {
       final res = await dbService.getRecords(
         tableId,
-        offset: offset.value,
-        limit: limit,
-        sort: '-CreatedAt',
+        viewId: viewId,
+        skip: skip.value,
+        take: take,
+        orderBy: '[{"fieldId":"CreatedAt","order":"asc"}]',
       );
-      isLastPage.value = res['pageInfo']['isLastPage'];
-      if (offset.value == 0) {
-        data.value = res['list'];
+      isLastPage.value = res['records'].length < take;
+      if (skip.value == 0) {
+        records.value = res['records'];
       } else {
-        data.addAll(res['list']);
+        records.addAll(res['records']);
       }
     } catch (e) {
       Fluttertoast.showToast(msg: "加载失败");
@@ -59,19 +61,20 @@ class BaseController extends GetxController {
 
   /// 下拉刷新
   Future<void> pullfresh() async {
-    offset.value = 0;
+    skip.value = 0;
+    isLastPage.value = false;
     await fetchData();
     Fluttertoast.showToast(msg: "更新成功");
   }
 
   /// 上拉加载更多
   void loadMore() {
-    Log.d('[$tag] loadMore: offset = $offset');
+    Log.d('[$tag] loadMore: skip = $skip, isLastPage = $isLastPage');
     if (isLastPage.value) {
       Fluttertoast.showToast(msg: "已加载全部数据");
       return;
     }
-    offset.value += limit;
+    skip.value += take;
     fetchData();
   }
 
@@ -86,7 +89,8 @@ class BaseController extends GetxController {
     await Get.toNamed(editViewRoute, arguments: item ?? {});
 
     // 返回后刷新数据
-    offset.value = 0;
+    skip.value = 0;
+    isLastPage.value = false;
     await fetchData();
     Fluttertoast.showToast(msg: "已更新数据");
   }

@@ -11,6 +11,7 @@ class DiaryEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = Get.find<DiaryEditController>();
+
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Get.theme.colorScheme.surface,

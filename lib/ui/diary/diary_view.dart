@@ -44,32 +44,33 @@ class DiaryView extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(
                       parent: BouncingScrollPhysics(),
                     ),
-                    itemCount: c.data.length,
+                    itemCount: c.records.length,
                     itemBuilder: (context, index) {
-                      final item = c.data[index];
+                      final Map<String, dynamic> item = c.records[index];
+                      final Map<String, dynamic> itemFields = item['fields'];
                       return GestureDetector(
                         onTap: () => c.toReadView(item),
                         child: MeCard(
                           children: [
                             Text(
-                              item['Content'],
+                              itemFields['Content'],
                               style: TextStyle(fontSize: 14),
                               textAlign: TextAlign.justify,
                               maxLines: 20,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 4),
-                            if (item['Tags'] != null)
+                            if (itemFields['Tags'] != null)
                               ItemChip(
                                 svg: Svg.hash,
                                 label: '标签',
-                                value: item['Tags'],
+                                value: itemFields['Tags'],
                                 fontSize: 12,
                               ),
                             ItemChip(
                               svg: Svg.datetime,
                               label: '时间',
-                              value: item['CreatedAt'],
+                              value: itemFields['CreatedAt'],
                               fontSize: 12,
                             ),
                           ],

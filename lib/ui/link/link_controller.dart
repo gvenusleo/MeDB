@@ -6,6 +6,9 @@ class LinkController extends BaseController {
   String get tableId => AppConfig.linkTableId;
 
   @override
+  String get viewId => AppConfig.linkViewId;
+
+  @override
   String get tag => 'LinkController';
 
   @override

@@ -43,9 +43,10 @@ class LinkView extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(
                       parent: BouncingScrollPhysics(),
                     ),
-                    itemCount: c.data.length,
+                    itemCount: c.records.length,
                     itemBuilder: (context, index) {
-                      final item = c.data[index];
+                      final item = c.records[index];
+                      final itemFields = item['fields'];
                       return GestureDetector(
                         onTap: () => c.toEditView(item: item),
                         child: MeCard(
@@ -53,29 +54,29 @@ class LinkView extends StatelessWidget {
                             ItemChip(
                               svg: Svg.text,
                               label: '标题',
-                              value: item['Title'],
+                              value: itemFields['Title'],
                             ),
                             ItemChip(
                               svg: Svg.link,
                               label: '链接',
-                              value: item['Url'],
+                              value: itemFields['Url'],
                             ),
                             if (item['Tags'] != null)
                               ItemChip(
                                 svg: Svg.hash,
                                 label: '标签',
-                                value: item['Tags'],
+                                value: itemFields['Tags'],
                               ),
                             item['UpdatedAt'] == null
                                 ? ItemChip(
                                   svg: Svg.datetime,
                                   label: '更新',
-                                  value: item['CreatedAt'],
+                                  value: itemFields['CreatedAt'],
                                 )
                                 : ItemChip(
                                   svg: Svg.datetime,
                                   label: '更新',
-                                  value: item['UpdatedAt'],
+                                  value: itemFields['UpdatedAt'],
                                 ),
                           ],
                         ),

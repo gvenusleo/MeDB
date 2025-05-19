@@ -37,57 +37,55 @@ class PoemReadView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
           physics: const BouncingScrollPhysics(),
           child: SelectionArea(
-            child: Obx(
-              () => MeCard(
-                children: [
-                  Text(
-                    c.data['Title'] ?? '',
-                    style: TextStyle(fontSize: 20),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    c.data['Author'] ?? '',
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
+            child: MeCard(
+              children: [
+                Text(
+                  c.dataFields['Title'] ?? '',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  c.dataFields['Author'] ?? '',
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                const Divider(thickness: 0.5),
+                const SizedBox(height: 12),
+                Text(
+                  c.dataFields['Content'] ?? '',
+                  textAlign:
+                      c.dataFields['Type'] == '诗'
+                          ? TextAlign.center
+                          : TextAlign.justify,
+                  style: TextStyle(fontSize: 16),
+                ),
+                if (c.dataFields['Note'] != null) ...[
+                  const SizedBox(height: 12),
                   const Divider(thickness: 0.5),
                   const SizedBox(height: 12),
                   Text(
-                    c.data['Content'] ?? '',
-                    textAlign:
-                        c.data['Type'] == '诗'
-                            ? TextAlign.center
-                            : TextAlign.justify,
-                    style: TextStyle(fontSize: 16),
+                    c.dataFields['Note'],
+                    style: TextStyle(fontSize: 14),
+                    textAlign: TextAlign.justify,
                   ),
-                  if (c.data['Note'] != null) ...[
-                    const SizedBox(height: 12),
-                    const Divider(thickness: 0.5),
-                    const SizedBox(height: 12),
-                    Text(
-                      c.data['Note'],
-                      style: TextStyle(fontSize: 14),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                  const SizedBox(height: 18),
-                  if (c.data['UpdatedAt'] != null)
-                    ItemChip(
-                      svg: Svg.datetime,
-                      label: '更新',
-                      value: c.data['UpdatedAt'],
-                      fontSize: 12,
-                    ),
-                  if (c.data['CreatedAt'] != null)
-                    ItemChip(
-                      svg: Svg.datetime,
-                      label: '创建',
-                      value: c.data['CreatedAt'],
-                      fontSize: 12,
-                    ),
                 ],
-              ),
+                const SizedBox(height: 18),
+                if (c.dataFields['UpdatedAt'] != null)
+                  ItemChip(
+                    svg: Svg.datetime,
+                    label: '更新',
+                    value: c.dataFields['UpdatedAt'],
+                    fontSize: 12,
+                  ),
+                if (c.dataFields['CreatedAt'] != null)
+                  ItemChip(
+                    svg: Svg.datetime,
+                    label: '创建',
+                    value: c.dataFields['CreatedAt'],
+                    fontSize: 12,
+                  ),
+              ],
             ),
           ),
         ),

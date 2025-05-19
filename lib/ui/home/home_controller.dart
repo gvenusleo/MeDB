@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:medb/ui/diary/diary_view.dart';
 import 'package:medb/ui/link/link_view.dart';
 import 'package:medb/ui/poem/poem_view.dart';
-import 'package:medb/ui/tag/tag_view.dart';
 import 'package:medb/widgets/svg.dart';
 
 class HomeController extends GetxController {
@@ -12,7 +11,6 @@ class HomeController extends GetxController {
     '人生海海': SvgIcon(assetName: Svg.atom, size: 16),
     '诗词歌赋': SvgIcon(assetName: Svg.box, size: 16),
     '网页链接': SvgIcon(assetName: Svg.link, size: 16),
-    '标签管理': SvgIcon(assetName: Svg.hash, size: 16),
   };
 
   /// 主页视图
@@ -20,7 +18,6 @@ class HomeController extends GetxController {
     const DiaryView(),
     const PoemView(),
     const LinkView(),
-    const TagView(),
   ];
 
   /// Drawer 当前选中的表

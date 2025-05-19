@@ -44,15 +44,16 @@ class PoemView extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(
                       parent: BouncingScrollPhysics(),
                     ),
-                    itemCount: c.data.length,
+                    itemCount: c.records.length,
                     itemBuilder: (context, index) {
-                      final item = c.data[index];
+                      final Map<String, dynamic> item = c.records[index];
+                      final Map<String, dynamic> itemFields = item['fields'];
                       return GestureDetector(
                         onTap: () => c.toReadView(item),
                         child: MeCard(
                           children: [
                             Text(
-                              item['Title'],
+                              itemFields['Title'],
                               style: TextStyle(fontSize: 18),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -61,29 +62,29 @@ class PoemView extends StatelessWidget {
                             ItemChip(
                               svg: Svg.text,
                               label: '作者',
-                              value: item['Author'],
+                              value: itemFields['Author'],
                             ),
                             ItemChip(
                               svg: Svg.text,
                               label: '内容',
-                              value: item['Content'],
+                              value: itemFields['Content'],
                             ),
-                            if (item['Note'] != null)
+                            if (itemFields['Note'] != null)
                               ItemChip(
                                 svg: Svg.text,
                                 label: '笔记',
-                                value: item['Note'],
+                                value: itemFields['Note'],
                               ),
-                            item['UpdatedAt'] == null
+                            itemFields['UpdatedAt'] == null
                                 ? ItemChip(
                                   svg: Svg.datetime,
                                   label: '更新',
-                                  value: item['CreatedAt'],
+                                  value: itemFields['CreatedAt'],
                                 )
                                 : ItemChip(
                                   svg: Svg.datetime,
                                   label: '更新',
-                                  value: item['UpdatedAt'],
+                                  value: itemFields['UpdatedAt'],
                                 ),
                           ],
                         ),
