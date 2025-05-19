@@ -50,7 +50,7 @@ class HomeView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('MeDB ', style: Get.theme.textTheme.titleLarge),
-                    Text('with NocoDB', style: Get.theme.textTheme.titleSmall),
+                    Text('with Teable', style: Get.theme.textTheme.titleSmall),
                   ],
                 ),
               ),
