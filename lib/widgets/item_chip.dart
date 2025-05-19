@@ -54,12 +54,12 @@ class ItemChip extends StatelessWidget {
                           for (final e in value!)
                             Container(
                               decoration: BoxDecoration(
-                                color:
-                                    Get
-                                        .theme
-                                        .colorScheme
-                                        .surfaceContainerHighest,
-                                borderRadius: BorderRadius.circular(4),
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Get.theme.colorScheme.outline,
+                                    width: 1.0,
+                                  ),
+                                ),
                               ),
                               margin: EdgeInsets.only(right: 4),
                               padding: EdgeInsets.symmetric(horizontal: 2),
