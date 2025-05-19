@@ -49,11 +49,11 @@ class TeableService extends GetxService {
   }
 
   /// 添加一条数据，返回 Id
-  Future<int> createRecord(String tableId, Map<String, dynamic> data) async {
+  Future<String> createRecord(String tableId, Map<String, dynamic> data) async {
     final String path = '/api/table/$tableId/record';
     final Map<String, dynamic> body = {
       'records': [
-        {'fileds': data},
+        {'fields': data},
       ],
       'fieldKeyType': 'name',
       'typecast': true,

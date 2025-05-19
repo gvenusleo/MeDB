@@ -45,7 +45,7 @@ class BaseController extends GetxController {
         viewId: viewId,
         skip: skip.value,
         take: take,
-        orderBy: '[{"fieldId":"CreatedAt","order":"asc"}]',
+        orderBy: '[{"fieldId":"CreatedAt","order":"desc"}]',
       );
       isLastPage.value = res['records'].length < take;
       if (skip.value == 0) {
@@ -86,7 +86,7 @@ class BaseController extends GetxController {
 
   /// 跳转到编辑页面添加数据
   Future<void> toEditView({dynamic item}) async {
-    await Get.toNamed(editViewRoute, arguments: item ?? {});
+    await Get.toNamed(editViewRoute, arguments: item ?? <String, dynamic>{});
 
     // 返回后刷新数据
     skip.value = 0;
