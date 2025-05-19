@@ -61,13 +61,13 @@ class LinkView extends StatelessWidget {
                               label: '链接',
                               value: itemFields['Url'],
                             ),
-                            if (item['Tags'] != null)
+                            if (itemFields['Tags'] != null)
                               ItemChip(
                                 svg: Svg.hash,
                                 label: '标签',
                                 value: itemFields['Tags'],
                               ),
-                            item['UpdatedAt'] == null
+                            itemFields['UpdatedAt'] == null
                                 ? ItemChip(
                                   svg: Svg.datetime,
                                   label: '更新',
